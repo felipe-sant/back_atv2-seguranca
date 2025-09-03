@@ -13,6 +13,7 @@
         "vercel.json": true,
         ".github": true,
         ".gitattributes": true,
-        "eslint.config.mjs": true
+        "eslint.config.mjs": true,
+        ".env.example": true
     }
 }
