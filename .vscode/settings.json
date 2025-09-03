@@ -1,0 +1,18 @@
+{
+    "git.enabled": true,
+    "files.exclude": {
+        "**/.git": true,
+        "**/node_modules": true,
+        ".gitignore": true,
+        ".vscode": true,
+        "README.md": true,
+        "package-lock.json": true,
+        "tsconfig.json": true,
+        "LICENSE": true,
+        "jest.config.ts": true,
+        "vercel.json": true,
+        ".github": true,
+        ".gitattributes": true,
+        "eslint.config.mjs": true
+    }
+}
