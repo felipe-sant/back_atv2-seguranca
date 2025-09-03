@@ -5,7 +5,10 @@
   "scripts": {
     "start": "npx ts-node src/index.ts",
     "build": "tsc",
-    "dev": "nodemon src/index.ts"
+    "dev": "nodemon src/index.ts",
+    "up": "docker-compose up -d",
+    "down": "docker-compose down -v",
+    "db:restart": "docker-compose down -v && docker-compose up -d"
   },
   "repository": {
     "type": "git",
@@ -22,7 +25,8 @@
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^17.2.2",
-    "express": "^4.17.1",
+    "express": "^4.21.2",
+    "helmet": "^8.1.0",
     "i18next": "^25.3.2",
     "i18next-fs-backend": "^2.6.0",
     "i18next-http-middleware": "^3.7.4",
