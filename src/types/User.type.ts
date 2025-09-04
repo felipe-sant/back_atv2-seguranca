@@ -1,5 +1,5 @@
 type UserType = {
-    id: number
+    id?: number
     username: string
     password: string
 }
