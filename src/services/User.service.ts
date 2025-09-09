@@ -9,7 +9,7 @@ class UserService {
         user.password = await hashPassword(user.password)
 
         const query = "INSERT INTO users (username, password) VALUES ($1, $2)"
-        const result = await db.query(query, [user.username, user.password])
+        await db.query(query, [user.username, user.password])
     }
 
     async getInfo(user: UserType) {
@@ -17,11 +17,9 @@ class UserService {
     }
 
     async __test__() {
-        const query = "SELECT * FROM users WHERE id = 1"
+        const query = "SELECT * FROM users"
         const result = await db.query(query)
-        const user = result.rows[0] as UserType
-        user.username = decrypt(user.username)
-        return user
+        return { count: result.rowCount, rows: result.rows }
     }
 }
 

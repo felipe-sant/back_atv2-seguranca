@@ -21,16 +21,6 @@ class UserController {
             }
 
             const user: UserType = { username: username, password: password }
-            user.username = sanitizeHTML(user.username, {
-                allowedTags: [],
-                allowedAttributes: {},
-                allowedSchemes: ['https']
-            })
-            user.password = sanitizeHTML(user.password, {
-                allowedTags: [],
-                allowedAttributes: {},
-                allowedSchemes: ['https']
-            })
 
             await this.userService.createUser(user)
 
