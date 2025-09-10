@@ -16,3 +16,9 @@ CREATE TABLE
         phone VARCHAR(100) NOT NULL,
         FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE ON UPDATE CASCADE
     );
+
+CREATE TABLE
+    tokens (
+        id SERIAL NOT NULL PRIMARY KEY,
+        token VARCHAR(500) NOT NULL
+    );
