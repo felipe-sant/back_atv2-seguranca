@@ -4,6 +4,7 @@ import UserService from '../services/User.service'
 import UserType from '../types/User.type'
 import { generateAccessToken, generateRefreshToken, verifyRefreshToken } from '../utils/jwt'
 import RefreshTokenService from '../services/RefreshToken.service'
+import AuthRequest from '../types/interfaces/AuthRequest'
 
 class UserController {
     private userService: UserService
@@ -25,7 +26,7 @@ class UserController {
             const user: UserType = { username: username, password: password }
             await this.userService.createUser(user)
 
-            res.status(200).json({ message: "Usuário criado com sucesso!" })
+            res.status(200).json({ message: "User created successfully!" })
         } catch (error: unknown) {
             const errorMessage = getErrorMessage(error)
             res.status(500).json({ message: errorMessage })
@@ -50,7 +51,7 @@ class UserController {
             }
 
             if (response.isLogged && response.user) {
-                const payload = { sub: username.id, username }
+                const payload = { sub: response.user.id?.toString(), username }
                 const accessToken = generateAccessToken(payload)
                 const refreshToken = generateRefreshToken(payload)
 
@@ -84,7 +85,6 @@ class UserController {
 
             const payload = verifyRefreshToken(refreshToken)
 
-            // remove exp e iat do payload
             const { exp, iat, ...cleanPayload } = payload
 
             const newAccessToken = generateAccessToken(cleanPayload)
@@ -95,7 +95,6 @@ class UserController {
             res.status(500).json({ message: errorMessage })
         }
     }
-
 
     async logout(req: Request, res: Response) {
         try {
@@ -116,10 +115,11 @@ class UserController {
         }
     }
 
-    async __test__(_: Request, res: Response) {
+    async getProfile(req: AuthRequest, res: Response) {
         try {
-            const result = await this.userService.__test__()
-            res.status(200).json(result)
+            const user = req.user
+            const info = await this.userService.getInfo(user.sub)
+            res.status(200).json({ info: info})
         } catch (error: unknown) {
             const errorMessage = getErrorMessage(error)
             res.status(500).json({ message: errorMessage })

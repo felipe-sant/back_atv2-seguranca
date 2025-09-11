@@ -1,10 +1,6 @@
-import { Request, Response, NextFunction } from "express";
+import { Response, NextFunction } from "express";
 import { verifyAccessToken } from "../utils/jwt";
-import RefreshTokenService from "../services/RefreshToken.service";
-
-export interface AuthRequest extends Request {
-    user?: any;
-}
+import AuthRequest from "../types/interfaces/AuthRequest";
 
 export async function requireAuthMiddleware(req: AuthRequest, res: Response, next: NextFunction) {
     const authHeader = req.headers.authorization;

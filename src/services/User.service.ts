@@ -33,8 +33,15 @@ class UserService {
         }
     }
 
-    async getInfo(user: UserType) {
+    async getInfo(id: number) {
+        const query = "SELECT username FROM users WHERE id = ($1)"
+        const usernameEncripted = (await db.query(query, [id])).rows[0].username
 
+        const userInfo = {
+            username: decrypt(usernameEncripted),
+        }
+
+        return userInfo
     }
 
     async __test__() {

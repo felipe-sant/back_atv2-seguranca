@@ -1,5 +1,5 @@
 type ContactType = {
-    id: number
+    id?: number
     user_id: number
     name: string
     phone: string

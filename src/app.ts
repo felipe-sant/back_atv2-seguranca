@@ -5,6 +5,7 @@ import userRouter from './routes/User.routes'
 import helmet from 'helmet'
 import { sanitizeMiddleware } from './middlewares/sanitize.middleware'
 import cookieParser from "cookie-parser"
+import contactRouter from './routes/Contact.routes'
 
 const app = express()
 
@@ -15,6 +16,7 @@ app.use(requestLoggerMiddleware)
 app.use(sanitizeMiddleware)
 app.use(cookieParser())
 
-app.use('/', userRouter)
+app.use('/user', userRouter)
+app.use('/contact', contactRouter)
 
 export default app
